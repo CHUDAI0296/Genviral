@@ -3,8 +3,8 @@ let currentImage = null;
 let isProcessing = false;
 let processedImages = [];
 let apiConfig = {
-    apiKey: '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', // OpenRouter API密钥
-    openaiKey: '', // OpenAI API密钥（用于图像生成和编辑）
+    apiKey: '', // OpenRouter API密钥，将从环境变量或localStorage获取
+    openaiKey: '', // OpenAI API密钥，将从环境变量或localStorage获取
     endpoints: {
         openRouter: 'https://openrouter.ai/api/v1',
         openai: {
@@ -15,7 +15,8 @@ let apiConfig = {
     models: {
         chat: 'openai/gpt-4.1-nano', // 默认聊天模型
         vision: 'openai/gpt-4-turbo' // 默认视觉模型（保留视觉能力）
-    }
+    },
+    isVercel: false // 标记是否从Vercel环境变量加载
 };
 
 // DOM 元素
@@ -41,10 +42,10 @@ const chatModelSelect = document.getElementById('chatModel');
 const visionModelSelect = document.getElementById('visionModel');
 
 // 初始化
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     initializeEventListeners();
     loadHistory();
-    loadAPIConfig();
+    await loadAPIConfig();
 });
 
 // 初始化事件监听器
@@ -730,35 +731,80 @@ function getVisionModel() {
 }
 
 function setAPIConfig(openRouterKey, openaiKey, chatModel, visionModel) {
-    // 设置API配置
-    apiConfig.apiKey = openRouterKey;
-    apiConfig.openaiKey = openaiKey;
+    // 如果是从Vercel环境变量加载的，不要覆盖API密钥
+    if (!apiConfig.isVercel) {
+        // 设置API配置
+        apiConfig.apiKey = openRouterKey;
+        apiConfig.openaiKey = openaiKey;
+        
+        // 保存到本地存储
+        localStorage.setItem('genviral-openrouter-key', openRouterKey);
+        localStorage.setItem('genviral-openai-key', openaiKey);
+    } else {
+        // 如果是从Vercel环境变量加载的，显示提示信息
+        showMessage('API密钥已从Vercel环境变量加载，本地设置的API密钥将不会生效', 'info');
+    }
     
-    if (chatModel) apiConfig.models.chat = chatModel;
-    if (visionModel) apiConfig.models.vision = visionModel;
-    
-    // 保存到本地存储
-    localStorage.setItem('genviral-openrouter-key', openRouterKey);
-    localStorage.setItem('genviral-openai-key', openaiKey);
-    
-    if (chatModel) localStorage.setItem('genviral-chat-model', chatModel);
-    if (visionModel) localStorage.setItem('genviral-vision-model', visionModel);
+    // 无论如何都保存模型配置
+    if (chatModel) {
+        apiConfig.models.chat = chatModel;
+        localStorage.setItem('genviral-chat-model', chatModel);
+    }
+    if (visionModel) {
+        apiConfig.models.vision = visionModel;
+        localStorage.setItem('genviral-vision-model', visionModel);
+    }
 }
 
-function loadAPIConfig() {
-    // 从本地存储加载API配置
-    const savedOpenRouterKey = localStorage.getItem('genviral-openrouter-key');
-    const savedOpenAIKey = localStorage.getItem('genviral-openai-key');
+// 加载API配置
+async function loadAPIConfig() {
+    // 首先尝试从Vercel环境变量获取配置
+    try {
+        const response = await fetch('/api/config');
+        if (response.ok) {
+            const config = await response.json();
+            if (config.openRouterKey) {
+                apiConfig.apiKey = config.openRouterKey;
+                apiConfig.isVercel = true;
+            }
+            if (config.openaiKey) {
+                apiConfig.openaiKey = config.openaiKey;
+                apiConfig.isVercel = true;
+            }
+            console.log('从Vercel环境变量加载API配置成功');
+        }
+    } catch (error) {
+        console.log('从Vercel环境变量加载API配置失败，将使用本地存储', error);
+    }
+
+    // 如果Vercel环境变量不可用，则从本地存储加载
+    if (!apiConfig.isVercel) {
+        // 从本地存储加载API配置
+        const savedOpenRouterKey = localStorage.getItem('genviral-openrouter-key');
+        const savedOpenAIKey = localStorage.getItem('genviral-openai-key');
+        const savedChatModel = localStorage.getItem('genviral-chat-model');
+        const savedVisionModel = localStorage.getItem('genviral-vision-model');
+        
+        if (savedOpenRouterKey) {
+            apiConfig.apiKey = savedOpenRouterKey;
+        }
+        
+        if (savedOpenAIKey) {
+            apiConfig.openaiKey = savedOpenAIKey;
+        }
+        
+        if (savedChatModel) {
+            apiConfig.models.chat = savedChatModel;
+        }
+        
+        if (savedVisionModel) {
+            apiConfig.models.vision = savedVisionModel;
+        }
+    }
+
+    // 无论如何都从本地存储加载模型配置
     const savedChatModel = localStorage.getItem('genviral-chat-model');
     const savedVisionModel = localStorage.getItem('genviral-vision-model');
-    
-    if (savedOpenRouterKey) {
-        apiConfig.apiKey = savedOpenRouterKey;
-    }
-    
-    if (savedOpenAIKey) {
-        apiConfig.openaiKey = savedOpenAIKey;
-    }
     
     if (savedChatModel) {
         apiConfig.models.chat = savedChatModel;
@@ -789,7 +835,12 @@ function saveSettings() {
     // 显示保存成功消息
     const successMessage = document.createElement('div');
     successMessage.className = 'save-success';
-    successMessage.textContent = 'Settings saved successfully!';
+    
+    if (apiConfig.isVercel) {
+        successMessage.textContent = '模型设置已保存！(API密钥使用Vercel环境变量)';
+    } else {
+        successMessage.textContent = '设置保存成功！';
+    }
     
     const modalFooter = document.querySelector('.modal-footer');
     modalFooter.appendChild(successMessage);
@@ -802,8 +853,21 @@ function saveSettings() {
 }
 
 function loadSettingsToForm() {
-    openRouterKeyInput.value = apiConfig.apiKey;
-    openaiKeyInput.value = apiConfig.openaiKey;
+    if (apiConfig.isVercel) {
+        // 如果是从Vercel环境变量加载的，显示提示信息
+        openRouterKeyInput.value = '(从Vercel环境变量加载)';
+        openRouterKeyInput.disabled = true;
+        openaiKeyInput.value = '(从Vercel环境变量加载)';
+        openaiKeyInput.disabled = true;
+    } else {
+        // 否则显示本地存储的值
+        openRouterKeyInput.value = apiConfig.apiKey;
+        openaiKeyInput.value = apiConfig.openaiKey;
+        openRouterKeyInput.disabled = false;
+        openaiKeyInput.disabled = false;
+    }
+    
+    // 无论如何都显示模型配置
     chatModelSelect.value = apiConfig.models.chat;
     visionModelSelect.value = apiConfig.models.vision;
 }

@@ -107,3 +107,23 @@ MIT License
 ---
 
 **Let Genviral give wings to your creativity** ✨ 
+
+## Vercel部署
+
+### 部署步骤
+
+1. Fork或克隆此仓库
+2. 在Vercel上创建新项目，导入该仓库
+3. 在Vercel项目设置中添加环境变量：
+   - `OPENROUTER_API_KEY`: 您的OpenRouter API密钥
+   - `OPENAI_API_KEY`: 您的OpenAI API密钥
+4. 部署项目
+
+### 环境变量
+
+在Vercel部署时，可以使用以下环境变量：
+
+- `OPENROUTER_API_KEY`: OpenRouter API密钥，用于文本和视觉模型
+- `OPENAI_API_KEY`: OpenAI API密钥，用于DALL-E图像生成
+
+这些环境变量会覆盖本地存储的API密钥设置。 
