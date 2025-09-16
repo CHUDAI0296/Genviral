@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuth } from '@/contexts/AuthContext'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { AnimatedWrapper } from '@/components/AnimatedWrapper'
 import { AnimatedCard } from '@/components/AnimatedCard'
 import { AnimatedButton } from '@/components/AnimatedButton'
@@ -13,19 +13,13 @@ import { supabase } from '@/lib/supabase'
 import type { VideoGeneration, Payment } from '@/lib/credits'
 
 export default function DashboardPage() {
-  const { user, loading, credits, refreshCredits } = useAuth()
+  const { user, loading, refreshCredits } = useAuth()
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false)
   const [videoGenerations, setVideoGenerations] = useState<VideoGeneration[]>([])
   const [payments, setPayments] = useState<Payment[]>([])
   const [dataLoading, setDataLoading] = useState(true)
 
-  useEffect(() => {
-    if (user) {
-      loadUserData()
-    }
-  }, [user])
-
-  const loadUserData = async () => {
+  const loadUserData = useCallback(async () => {
     if (!user) return
 
     setDataLoading(true)
@@ -38,27 +32,29 @@ export default function DashboardPage() {
         .order('created_at', { ascending: false })
         .limit(10)
 
-      if (generations) {
-        setVideoGenerations(generations)
-      }
+      setVideoGenerations(generations || [])
 
-      // Load payment history
-      const { data: paymentHistory } = await supabase
+      // Load payments
+      const { data: paymentData } = await supabase
         .from('payments')
         .select('*')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
-        .limit(10)
+        .limit(5)
 
-      if (paymentHistory) {
-        setPayments(paymentHistory)
-      }
+      setPayments(paymentData || [])
     } catch (error) {
-      console.error('Failed to load user data:', error)
+      console.error('Error loading user data:', error)
     } finally {
       setDataLoading(false)
     }
-  }
+  }, [user])
+
+  useEffect(() => {
+    if (user) {
+      loadUserData()
+    }
+  }, [user, loadUserData])
 
   if (loading) {
     return (

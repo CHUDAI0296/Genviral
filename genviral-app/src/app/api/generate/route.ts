@@ -4,7 +4,6 @@ import { existsSync } from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import Replicate from 'replicate';
-import { supabase } from '@/lib/supabase';
 import { hasEnoughCredits, deductCredits, createVideoGeneration, updateVideoGeneration } from '@/lib/credits';
 
 interface VideoGenerationRequest {

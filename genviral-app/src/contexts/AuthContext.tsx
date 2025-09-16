@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
 import { getUserCredits, UserCredits } from '@/lib/credits'
@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [credits, setCredits] = useState<UserCredits | null>(null)
   const [creditsLoading, setCreditsLoading] = useState(false)
 
-  const refreshCredits = async () => {
+  const refreshCredits = useCallback(async () => {
     if (!user) {
       setCredits(null)
       return
@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setCreditsLoading(false)
     }
-  }
+  }, [user])
 
   useEffect(() => {
     // Get initial session
@@ -68,14 +68,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     })
 
     return () => subscription.unsubscribe()
-  }, [])
+  }, [refreshCredits])
 
   // Refresh credits when user changes
   useEffect(() => {
     if (user) {
       refreshCredits()
     }
-  }, [user])
+  }, [user, refreshCredits])
 
   const signUp = async (email: string, password: string) => {
     const { error } = await supabase.auth.signUp({

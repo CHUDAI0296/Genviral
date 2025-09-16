@@ -14,7 +14,7 @@ export interface PaymentMethod {
   icon: string;
   description: string;
   enabled: boolean;
-  config?: Record<string, any>;
+  config?: Record<string, unknown>;
 }
 
 export interface PaymentItem {
@@ -35,7 +35,7 @@ export interface PaymentData {
     name?: string;
     phone?: string;
   };
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface PaymentResult {

@@ -18,7 +18,7 @@ export function GeneratorForm() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
 
-  const { user, credits, refreshCredits } = useAuth();
+  const { user, refreshCredits } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

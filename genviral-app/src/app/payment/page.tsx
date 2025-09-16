@@ -62,9 +62,9 @@ const samplePaymentData: PaymentData = {
 
 export default function PaymentPage() {
   const [showResult, setShowResult] = useState(false);
-  const [paymentResult, setPaymentResult] = useState<any>(null);
+  const [paymentResult, setPaymentResult] = useState<PaymentData | null>(null);
 
-  const handlePaymentSuccess = (result: any) => {
+  const handlePaymentSuccess = (result: PaymentData) => {
     setPaymentResult(result);
     setShowResult(true);
   };

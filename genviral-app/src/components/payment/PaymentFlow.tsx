@@ -10,7 +10,7 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 interface PaymentFlowProps {
   paymentData: PaymentData;
   availableMethods: PaymentMethod[];
-  onSuccess?: (result: any) => void;
+  onSuccess?: (result: PaymentData) => void;
   onError?: (error: string) => void;
   onCancel?: () => void;
   className?: string;

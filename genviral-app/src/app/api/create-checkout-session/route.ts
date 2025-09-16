@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { priceId, userId, planKey } = await request.json()
+    const { userId, planKey } = await request.json()
 
     if (!userId || !planKey) {
       return NextResponse.json(

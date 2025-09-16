@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session
 
-        const { userId, credits, planKey } = session.metadata!
+        const { userId, credits } = session.metadata!
         const paymentIntentId = session.payment_intent as string
         const amount = session.amount_total!
 

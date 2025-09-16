@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { PaymentProvider, PaymentMethod } from '@/types/payment';
 import { usePayment } from '@/contexts/PaymentContext';
+import Image from 'next/image';
 
 interface PaymentMethodSelectorProps {
   methods: PaymentMethod[];
@@ -58,7 +59,7 @@ export default function PaymentMethodSelector({
             <div className="flex flex-col items-center space-y-2">
               <div className="w-8 h-8 flex items-center justify-center">
                 {method.icon ? (
-                  <img src={method.icon} alt={method.name} className="w-8 h-8 object-contain" />
+                  <Image src={method.icon} alt={method.name} width={32} height={32} className="object-contain" />
                 ) : (
                   <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
                     <span className="text-xs text-gray-600">
