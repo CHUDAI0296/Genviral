@@ -1,0 +1,35 @@
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 33.33%;
+  min-width: 0;
+  padding-left: 1rem;
+  position: relative;
+  perspective: 1000px;
+}
+
+.embla__slide .slide-content {
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.embla__slide:hover .slide-content {
+  transform: rotateY(10deg) rotateX(5deg);
+}
+
+.embla__slide::after {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    right: 0;
+    bottom: -50%;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+    transform: scaleY(-1);
+    z-index: -1;
+    opacity: 0.3;
+}
