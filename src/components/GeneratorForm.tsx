@@ -141,7 +141,6 @@ export function GeneratorForm() {
                       <div className="mt-2">
                         <AnimatedButton
                           variant="primary"
-                          size="sm"
                           onClick={() => setIsPricingModalOpen(true)}
                         >
                           Buy More Credits

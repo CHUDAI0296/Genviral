@@ -96,7 +96,6 @@ function PricingCard({ plan, planKey, popular = false, onPurchase, loading }: Pr
 
         <AnimatedButton
           variant={popular ? "primary" : "secondary"}
-          size="lg"
           className="w-full font-bold text-lg py-4"
           onClick={() => onPurchase(planKey)}
           disabled={loading}

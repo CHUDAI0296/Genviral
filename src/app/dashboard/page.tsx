@@ -115,7 +115,6 @@ export default function DashboardPage() {
           </Link>
           <AnimatedButton
             variant="primary"
-            size="sm"
             onClick={() => setIsPricingModalOpen(true)}
           >
             Buy Credits
@@ -212,7 +211,7 @@ export default function DashboardPage() {
                           {getStatusBadge(generation.status)}
                           {generation.video_url && (
                             <Link href={generation.video_url} target="_blank">
-                              <AnimatedButton size="sm" variant="secondary">
+                              <AnimatedButton variant="secondary">
                                 View Video
                               </AnimatedButton>
                             </Link>

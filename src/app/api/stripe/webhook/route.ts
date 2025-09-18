@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 import { addCredits, createPaymentRecord, updatePaymentStatus } from '@/lib/credits'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2025-08-27.basil',
 })
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
@@ -30,6 +30,8 @@ export async function POST(request: NextRequest) {
         const session = event.data.object as Stripe.Checkout.Session
 
         const { userId, credits } = session.metadata!
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const planKey = session.metadata!.planKey // Extract planKey separately for potential future use
         const paymentIntentId = session.payment_intent as string
         const amount = session.amount_total!
 

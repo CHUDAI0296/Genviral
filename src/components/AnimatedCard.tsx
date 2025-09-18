@@ -16,7 +16,7 @@ export function AnimatedCard({ children, className = '' }: AnimatedCardProps) {
     animate: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: isMobile ? 0.4 : 0.5, ease: 'easeOut' }
+      transition: { duration: isMobile ? 0.4 : 0.5 }
     },
     hover: { 
       scale: isMobile ? 1.02 : 1.05,
@@ -24,7 +24,7 @@ export function AnimatedCard({ children, className = '' }: AnimatedCardProps) {
       boxShadow: isMobile 
         ? '0 4px 12px rgba(0, 0, 0, 0.1)' 
         : '0 10px 25px rgba(0, 0, 0, 0.15)',
-      transition: { duration: 0.3, ease: 'easeInOut' }
+      transition: { duration: 0.3 }
     }
   };
 

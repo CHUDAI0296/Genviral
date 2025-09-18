@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { usePayment } from '@/contexts/PaymentContext';
-import { PaymentMethod, PaymentData } from '@/types/payment';
+import { PaymentMethod, PaymentData, PaymentResult } from '@/types/payment';
 import PaymentMethodSelector from './PaymentMethodSelector';
 import PaymentSummary from './PaymentSummary';
 import LoadingSpinner from '../ui/LoadingSpinner';
@@ -10,7 +10,7 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 interface PaymentFlowProps {
   paymentData: PaymentData;
   availableMethods: PaymentMethod[];
-  onSuccess?: (result: PaymentData) => void;
+  onSuccess?: (result: PaymentResult) => void;
   onError?: (error: string) => void;
   onCancel?: () => void;
   className?: string;

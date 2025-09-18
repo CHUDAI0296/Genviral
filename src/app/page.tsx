@@ -5,7 +5,7 @@ import {
   PaymentFlow,
   PaymentResultPage
 } from '@/components';
-import { PaymentData, PaymentMethod } from '@/types/payment';
+import { PaymentData, PaymentMethod, PaymentResult } from '@/types/payment';
 import { useState } from 'react';
 
 // 示例支付方式配置
@@ -62,9 +62,9 @@ const samplePaymentData: PaymentData = {
 
 export default function PaymentPage() {
   const [showResult, setShowResult] = useState(false);
-  const [paymentResult, setPaymentResult] = useState<PaymentData | null>(null);
+  const [paymentResult, setPaymentResult] = useState<PaymentResult | null>(null);
 
-  const handlePaymentSuccess = (result: PaymentData) => {
+  const handlePaymentSuccess = (result: PaymentResult) => {
     setPaymentResult(result);
     setShowResult(true);
   };
@@ -100,11 +100,13 @@ export default function PaymentPage() {
               onCancel={() => console.log('Payment cancelled')}
             />
           ) : (
-            <PaymentResultPage
-              result={paymentResult}
-              onRetry={handleRetry}
-              onBackToHome={handleBackToHome}
-            />
+            paymentResult && (
+              <PaymentResultPage
+                result={paymentResult}
+                onRetry={handleRetry}
+                onBackToHome={handleBackToHome}
+              />
+            )
           )}
         </div>
       </div>

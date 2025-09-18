@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useReducer, ReactNode } from 'react';
-import { PaymentData, PaymentProvider, PaymentResult, PaymentStatus } from '@/types/payment';
+import { PaymentData, type PaymentProvider, PaymentResult, PaymentStatus } from '@/types/payment';
 
 interface PaymentState {
   status: PaymentStatus;

@@ -16,7 +16,7 @@ const defaultVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeInOut' },
+    transition: { duration: 0.6 },
   },
 };
 
@@ -25,7 +25,7 @@ const mobileVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: 'easeInOut' },
+    transition: { duration: 0.4 },
   },
 };
 
@@ -45,7 +45,8 @@ export function AnimatedWrapper({
     visible: {
       ...animationVariants.visible,
       transition: {
-        ...animationVariants.visible.transition,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        duration: (animationVariants.visible as any).transition?.duration || 0.6,
         delay: delay
       }
     }

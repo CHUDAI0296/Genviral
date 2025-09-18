@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { AnimatedWrapper } from '@/components/AnimatedWrapper'
 import { AnimatedButton } from '@/components/AnimatedButton'
@@ -8,7 +8,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
   const [loading, setLoading] = useState(true)
   const [paymentVerified, setPaymentVerified] = useState(false)
   const [creditsAdded, setCreditsAdded] = useState(0)
@@ -126,5 +126,20 @@ export default function PaymentSuccessPage() {
         </div>
       </AnimatedWrapper>
     </div>
+  )
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <LoadingSpinner />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    }>
+      <PaymentSuccessContent />
+    </Suspense>
   )
 }

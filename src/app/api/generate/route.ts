@@ -218,9 +218,8 @@ async function generateVideo(videoPrompt: string, topic: string): Promise<string
       }
 
       // Download and save the video file
-      if (output && output.url) {
-        const videoUrlObject = output.url();
-        const videoUrl = videoUrlObject.href || videoUrlObject.toString();
+      if (output && output.length > 0) {
+        const videoUrl = output[0]; // Get the first URL from the array
         console.log('Video generated successfully:', videoUrl);
 
         // Save video metadata
