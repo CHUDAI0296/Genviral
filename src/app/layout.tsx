@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Video Generator - Create Viral Videos Without Editing Skills | GenViral",
-  description: "No editing skills needed! GenViral's AI creates engaging social media videos instantly. Perfect for TikTok, Instagram, YouTube Shorts. Generate viral content with one click. Free trial!",
+  title: "AI Video Generator - Create Viral Videos | GenViral",
+  description: "Create engaging social media videos instantly with AI. Perfect for TikTok, Instagram, YouTube Shorts. No editing skills needed. Free trial!",
   keywords: "AI video generator, no editing skills, social media videos, viral video creator, TikTok video maker, Instagram videos, YouTube Shorts, AI content creation, video marketing tool, free video generator",
   authors: [{ name: "GenViral Team" }],
   creator: "GenViral",
@@ -23,16 +23,16 @@ export const metadata: Metadata = {
     canonical: "https://www.genviral.live/"
   },
   openGraph: {
-    title: "AI Video Generator - Create Viral Videos Without Editing Skills",
-    description: "No editing skills needed! GenViral's AI creates engaging social media videos instantly.",
+    title: "AI Video Generator - Create Viral Videos | GenViral",
+    description: "Create engaging social media videos instantly with AI. Perfect for TikTok, Instagram, YouTube Shorts.",
     type: "website",
     locale: "en_US",
     siteName: "GenViral"
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Video Generator - Create Viral Videos Without Editing Skills",
-    description: "No editing skills needed! GenViral's AI creates engaging social media videos instantly.",
+    title: "AI Video Generator - Create Viral Videos | GenViral",
+    description: "Create engaging social media videos instantly with AI. Perfect for TikTok, Instagram, YouTube Shorts.",
     creator: "@GenViral"
   }
 };
