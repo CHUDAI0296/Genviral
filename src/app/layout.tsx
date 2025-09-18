@@ -7,24 +7,24 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AI Video Generator - Create Viral Social Media Videos Without Editing Skills | GenViral",
-  description: "No video editing skills required! GenViral's AI-powered video generator creates engaging social media content with a single click. Perfect for TikTok, Instagram, YouTube Shorts. Generate viral videos instantly, boost your social media presence. Free trial available!",
-  keywords: "AI video generator, no editing skills required, social media videos, viral video creator, one-click video generation, TikTok video maker, Instagram videos, YouTube Shorts, AI content creation, automatic video editing, social media marketing, video marketing tool, free video generator, smart video creation, short video maker",
+  title: "AI Video Generator - Create Viral Videos Without Editing Skills | GenViral",
+  description: "No editing skills needed! GenViral's AI creates engaging social media videos instantly. Perfect for TikTok, Instagram, YouTube Shorts. Generate viral content with one click. Free trial!",
+  keywords: "AI video generator, no editing skills, social media videos, viral video creator, TikTok video maker, Instagram videos, YouTube Shorts, AI content creation, video marketing tool, free video generator",
   authors: [{ name: "GenViral Team" }],
   creator: "GenViral",
   publisher: "GenViral",
   robots: "index, follow",
   openGraph: {
-    title: "AI Video Generator - Create Viral Social Media Videos Without Editing Skills",
-    description: "No video editing skills required! GenViral's AI-powered video generator creates engaging social media content with a single click.",
+    title: "AI Video Generator - Create Viral Videos Without Editing Skills",
+    description: "No editing skills needed! GenViral's AI creates engaging social media videos instantly.",
     type: "website",
     locale: "en_US",
     siteName: "GenViral"
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Video Generator - Create Viral Social Media Videos Without Editing Skills",
-    description: "No video editing skills required! GenViral's AI-powered video generator creates engaging social media content with a single click.",
+    title: "AI Video Generator - Create Viral Videos Without Editing Skills",
+    description: "No editing skills needed! GenViral's AI creates engaging social media videos instantly.",
     creator: "@GenViral"
   }
 };
