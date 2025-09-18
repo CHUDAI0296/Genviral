@@ -5,6 +5,7 @@ import { AnimatedWrapper } from '@/components/AnimatedWrapper'
 import { AnimatedCard } from '@/components/AnimatedCard'
 import { AnimatedButton } from '@/components/AnimatedButton'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
+import { SimpleBreadcrumb } from '@/components/Breadcrumb'
 import { PRICING_PLANS } from '@/lib/credits'
 import { useAuth } from '@/contexts/AuthContext'
 import stripePromise from '@/lib/stripe'
@@ -181,6 +182,11 @@ export default function PricingPage() {
           )}
         </nav>
       </header>
+
+      {/* Breadcrumb */}
+      <div className="px-4 lg:px-6 py-4 bg-muted/30">
+        <SimpleBreadcrumb items={[{ label: 'Pricing' }]} />
+      </div>
 
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}

@@ -7,3 +7,6 @@ export { default as PaymentResultPage } from './payment/PaymentResultPage';
 
 // UI组件导出
 export { default as LoadingSpinner } from './ui/LoadingSpinner';
+
+// Navigation组件导出
+export { SimpleBreadcrumb as Breadcrumb } from './Breadcrumb';

@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { AnimatedWrapper } from '@/components/AnimatedWrapper'
 import { AnimatedButton } from '@/components/AnimatedButton'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
+import { SimpleBreadcrumb } from '@/components/Breadcrumb'
 import { useAuth } from '@/contexts/AuthContext'
 import Link from 'next/link'
 
@@ -57,8 +58,17 @@ function PaymentSuccessContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-      <AnimatedWrapper>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+      {/* Breadcrumb */}
+      <div className="px-4 lg:px-6 py-4 bg-muted/30">
+        <SimpleBreadcrumb items={[
+          { label: 'Payment', href: '/payment' },
+          { label: 'Success' }
+        ]} />
+      </div>
+
+      <div className="flex-1 flex items-center justify-center">
+        <AnimatedWrapper>
         <div className="max-w-md mx-auto text-center bg-white rounded-lg shadow-xl p-8">
           {paymentVerified ? (
             <>
@@ -125,6 +135,7 @@ function PaymentSuccessContent() {
           )}
         </div>
       </AnimatedWrapper>
+      </div>
     </div>
   )
 }

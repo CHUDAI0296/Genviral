@@ -8,6 +8,7 @@ import { AnimatedButton } from '@/components/AnimatedButton'
 import { CreditsDisplay } from '@/components/CreditsDisplay'
 import { PricingModal } from '@/components/PricingModal'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
+import { SimpleBreadcrumb } from '@/components/Breadcrumb'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { VideoGeneration, Payment } from '@/lib/credits'
@@ -121,6 +122,11 @@ export default function DashboardPage() {
           </AnimatedButton>
         </nav>
       </header>
+
+      {/* Breadcrumb */}
+      <div className="px-4 lg:px-6 py-4 bg-muted/30">
+        <SimpleBreadcrumb items={[{ label: 'Dashboard' }]} />
+      </div>
 
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">

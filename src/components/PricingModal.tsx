@@ -157,17 +157,17 @@ export function PricingModal({ isOpen, onClose }: PricingModalProps) {
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-900">Choose Your Plan</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Choose Your Plan</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-2xl"
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
             >
               ×
             </button>
           </div>
 
           <div className="text-center mb-8">
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-700 dark:text-gray-300 text-lg">
               Generate amazing videos with AI. Choose the plan that fits your needs.
             </p>
           </div>
