@@ -61,7 +61,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             {isLogin ? 'Welcome Back' : 'Create Account'}
           </h2>
-          <p className="text-gray-700 dark:text-gray-300 mt-2">
+          <p className="text-black mt-2">
             {isLogin ? 'Sign in to your account' : 'Sign up to get started'}
           </p>
         </div>
@@ -120,7 +120,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-gray-700 dark:text-gray-300">
+          <p className="text-black">
             {isLogin ? "Don't have an account?" : "Already have an account?"}
             <button
               onClick={() => setIsLogin(!isLogin)}

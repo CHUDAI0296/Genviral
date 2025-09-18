@@ -5,20 +5,9 @@ import { AnimatedWrapper } from '@/components/AnimatedWrapper';
 import { AnimatedCard } from '@/components/AnimatedCard';
 import { AnimatedButton } from '@/components/AnimatedButton';
 import { AuthProvider } from '@/contexts/AuthContext';
-import Image from 'next/image';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import FooterSection from '@/components/FooterSection';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-
-// 动态导入非关键组件以减少初始包大小
-const LazyTestimonials = dynamic(() => import('@/components/TestimonialsSection'), {
-  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />,
-  ssr: false
-});
-
-const LazyFooter = dynamic(() => import('@/components/FooterSection'), {
-  loading: () => <div className="h-64 bg-gray-50" />,
-  ssr: true
-});
 
 export default function HomePage() {
   const features = [
@@ -71,7 +60,7 @@ export default function HomePage() {
         <section id="features" className="w-full py-20 md:py-32 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <AnimatedWrapper>
-              <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl mb-12 text-foreground">
                 Why Choose Genviral?
               </h2>
             </AnimatedWrapper>
@@ -82,7 +71,7 @@ export default function HomePage() {
                   className="p-6 text-center"
                 >
                   <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-foreground">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </AnimatedCard>
               ))}
@@ -94,7 +83,7 @@ export default function HomePage() {
         <section id="how-it-works" className="w-full py-20 md:py-32 bg-muted">
           <div className="container mx-auto px-4 md:px-6">
             <AnimatedWrapper>
-              <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl mb-12 text-foreground">
                 How It Works
               </h2>
             </AnimatedWrapper>
@@ -120,7 +109,7 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {item.step}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-foreground">{item.title}</h3>
                   <p className="text-muted-foreground">{item.description}</p>
                 </AnimatedCard>
               ))}
@@ -129,7 +118,7 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials Section */}
-        <LazyTestimonials />
+        <TestimonialsSection />
 
         {/* CTA Section */}
         <section id="cta" className="w-full py-20 md:py-32 bg-primary">
@@ -151,7 +140,7 @@ export default function HomePage() {
         </section>
 
         {/* Footer */}
-        <LazyFooter />
+        <FooterSection />
       </div>
     </AuthProvider>
   );

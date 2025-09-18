@@ -35,10 +35,10 @@ function PricingCard({ plan, planKey, popular = false, onPurchase, loading }: Pr
       )}
 
       <div className="text-center space-y-4">
-        <h3 className="text-2xl font-bold">{plan.name}</h3>
+        <h3 className="text-2xl font-bold text-foreground">{plan.name}</h3>
 
         <div className="space-y-1">
-          <div className="text-4xl font-bold">${plan.price}</div>
+          <div className="text-4xl font-bold text-primary">${plan.price}</div>
           <div className="text-muted-foreground">{plan.credits} credits</div>
           <div className="text-sm text-muted-foreground">
             ${plan.pricePerCredit.toFixed(3)} per video
@@ -48,19 +48,19 @@ function PricingCard({ plan, planKey, popular = false, onPurchase, loading }: Pr
         <div className="space-y-2 py-4">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-sm">Generate {plan.credits} videos</span>
+            <span className="text-sm text-muted-foreground">Generate {plan.credits} videos</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-sm">HD video quality</span>
+            <span className="text-sm text-muted-foreground">HD video quality</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-sm">Commercial license</span>
+            <span className="text-sm text-muted-foreground">Commercial license</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-sm">24/7 support</span>
+            <span className="text-sm text-muted-foreground">24/7 support</span>
           </div>
         </div>
 
@@ -157,17 +157,17 @@ export function PricingModal({ isOpen, onClose }: PricingModalProps) {
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Choose Your Plan</h2>
+            <h2 className="text-3xl font-bold text-foreground">Choose Your Plan</h2>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
+              className="text-muted-foreground hover:text-foreground text-2xl transition-colors"
             >
               ×
             </button>
           </div>
 
           <div className="text-center mb-8">
-            <p className="text-gray-700 dark:text-gray-300 text-lg">
+            <p className="text-muted-foreground text-lg">
               Generate amazing videos with AI. Choose the plan that fits your needs.
             </p>
           </div>

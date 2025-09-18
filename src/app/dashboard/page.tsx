@@ -233,8 +233,8 @@ export default function DashboardPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                       </svg>
                     </div>
-                    <h4 className="font-medium mb-2">No videos yet</h4>
-                    <p className="text-muted-foreground mb-4">Create your first AI-generated video!</p>
+                    <h4 className="font-medium mb-2 text-black">No videos yet</h4>
+                    <p className="text-black mb-4">Generate your first video to see it here</p>
                     <Link href="/#hero">
                       <AnimatedButton variant="primary">
                         Generate Your First Video
@@ -275,8 +275,8 @@ export default function DashboardPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                       </svg>
                     </div>
-                    <h4 className="font-medium mb-2">No purchases yet</h4>
-                    <p className="text-muted-foreground mb-4">Your payment history will appear here</p>
+                    <h4 className="font-medium mb-2 text-black">Get More Credits</h4>
+                    <p className="text-black mb-4">Purchase credits to generate more videos</p>
                   </div>
                 )}
               </AnimatedCard>
