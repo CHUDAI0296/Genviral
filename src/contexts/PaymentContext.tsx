@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useReducer, ReactNode } from 'react';
+import { createContext, useContext, useReducer, ReactNode, useCallback } from 'react';
 import { PaymentData, type PaymentProvider, PaymentResult, PaymentStatus } from '@/types/payment';
 
 interface PaymentState {
@@ -90,15 +90,15 @@ const PaymentContext = createContext<PaymentContextType | undefined>(undefined);
 export function PaymentProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(paymentReducer, initialState);
 
-  const selectProvider = (provider: PaymentProvider) => {
+  const selectProvider = useCallback((provider: PaymentProvider) => {
     dispatch({ type: 'SELECT_PROVIDER', provider });
-  };
+  }, []);
 
-  const setPaymentData = (data: PaymentData) => {
+  const setPaymentData = useCallback((data: PaymentData) => {
     dispatch({ type: 'SET_PAYMENT_DATA', data });
-  };
+  }, []);
 
-  const processPayment = async () => {
+  const processPayment = useCallback(async () => {
     if (!state.selectedProvider || !state.paymentData) {
       dispatch({ type: 'SET_ERROR', error: '缺少支付提供商或支付数据' });
       return;
@@ -133,16 +133,16 @@ export function PaymentProvider({ children }: { children: ReactNode }) {
         error: error instanceof Error ? error.message : '支付处理出错',
       });
     }
-  };
+  }, [state.selectedProvider, state.paymentData]);
 
-  const cancelPayment = () => {
+  const cancelPayment = useCallback(() => {
     dispatch({ type: 'SET_STATUS', status: 'cancelled' });
     dispatch({ type: 'SET_LOADING', loading: false });
-  };
+  }, []);
 
-  const resetPayment = () => {
+  const resetPayment = useCallback(() => {
     dispatch({ type: 'RESET' });
-  };
+  }, []);
 
   const value: PaymentContextType = {
     ...state,

@@ -61,21 +61,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       // Refresh credits when user changes
       if (session?.user) {
-        refreshCredits()
+        // Call refreshCredits directly to avoid dependency loop
+        setCreditsLoading(true)
+        try {
+          const userCredits = await getUserCredits(session.user.id)
+          setCredits(userCredits)
+        } catch (error) {
+          console.error('Failed to fetch credits:', error)
+        } finally {
+          setCreditsLoading(false)
+        }
       } else {
         setCredits(null)
       }
     })
 
     return () => subscription.unsubscribe()
-  }, [refreshCredits])
+  }, []) // Remove refreshCredits dependency
 
-  // Refresh credits when user changes
+  // Initial credits load when user is available
   useEffect(() => {
     if (user) {
       refreshCredits()
     }
-  }, [user, refreshCredits])
+  }, [user?.id]) // Only depend on user.id, not the entire user object or refreshCredits
 
   const signUp = async (email: string, password: string) => {
     const { error } = await supabase.auth.signUp({

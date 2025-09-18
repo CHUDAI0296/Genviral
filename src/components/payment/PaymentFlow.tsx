@@ -40,7 +40,7 @@ export default function PaymentFlow({
 
   useEffect(() => {
     setPaymentData(paymentData);
-  }, [paymentData, setPaymentData]);
+  }, [paymentData]); // Remove setPaymentData from dependencies
 
   useEffect(() => {
     switch (status) {
@@ -66,7 +66,7 @@ export default function PaymentFlow({
     } else if (error) {
       onError?.(error);
     }
-  }, [result, error, onSuccess, onError]);
+  }, [result, error]); // Remove onSuccess and onError from dependencies
 
   const handleConfirmPayment = async () => {
     if (!selectedProvider) return;

@@ -54,7 +54,7 @@ export default function DashboardPage() {
     if (user) {
       loadUserData()
     }
-  }, [user, loadUserData])
+  }, [user?.id]) // Only depend on user.id instead of the entire user object and loadUserData
 
   if (loading) {
     return (
