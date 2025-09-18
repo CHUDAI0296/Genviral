@@ -4,7 +4,12 @@ import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter'
+});
 
 export const metadata: Metadata = {
   title: "AI Video Generator - Create Viral Videos Without Editing Skills | GenViral",
@@ -14,6 +19,9 @@ export const metadata: Metadata = {
   creator: "GenViral",
   publisher: "GenViral",
   robots: "index, follow",
+  alternates: {
+    canonical: "https://www.genviral.live/"
+  },
   openGraph: {
     title: "AI Video Generator - Create Viral Videos Without Editing Skills",
     description: "No editing skills needed! GenViral's AI creates engaging social media videos instantly.",

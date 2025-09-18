@@ -7,6 +7,18 @@ import { AnimatedButton } from '@/components/AnimatedButton';
 import { AuthProvider } from '@/contexts/AuthContext';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+// 动态导入非关键组件以减少初始包大小
+const LazyTestimonials = dynamic(() => import('@/components/TestimonialsSection'), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />,
+  ssr: false
+});
+
+const LazyFooter = dynamic(() => import('@/components/FooterSection'), {
+  loading: () => <div className="h-64 bg-gray-50" />,
+  ssr: true
+});
 
 export default function HomePage() {
   const features = [
@@ -29,27 +41,6 @@ export default function HomePage() {
       title: "High-Quality Output",
       description: "Generate stunning videos with professional quality",
       icon: "✨"
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Content Creator",
-      content: "Genviral has revolutionized my content creation process. I can now generate viral videos in minutes!",
-      avatar: "https://picsum.photos/100/100?random=1"
-    },
-    {
-      name: "Mike Chen",
-      role: "Marketing Manager",
-      content: "The AI-generated videos have increased our engagement by 300%. Simply amazing!",
-      avatar: "https://picsum.photos/100/100?random=2"
-    },
-    {
-      name: "Emma Davis",
-      role: "Social Media Influencer",
-      content: "I love how easy it is to create professional-looking videos. Genviral is a game-changer!",
-      avatar: "https://picsum.photos/100/100?random=3"
     }
   ];
 
@@ -138,39 +129,7 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className="w-full py-20 md:py-32 bg-background">
-          <div className="container mx-auto px-4 md:px-6">
-            <AnimatedWrapper>
-              <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl mb-12">
-                What Our Users Say
-              </h2>
-            </AnimatedWrapper>
-            <div className="overflow-x-auto">
-              <div className="flex gap-4 pb-4">
-                {testimonials.map((testimonial, index) => (
-                  <div key={index} className="flex-none w-80">
-                    <AnimatedCard className="p-6 h-full">
-                      <div className="flex items-center mb-4">
-                        <Image
-                          src={testimonial.avatar}
-                          alt={testimonial.name}
-                          width={48}
-                          height={48}
-                          className="w-12 h-12 rounded-full mr-4"
-                        />
-                        <div>
-                          <h4 className="font-semibold">{testimonial.name}</h4>
-                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground italic">&ldquo;{testimonial.content}&rdquo;</p>
-                    </AnimatedCard>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <LazyTestimonials />
 
         {/* CTA Section */}
         <section id="cta" className="w-full py-20 md:py-32 bg-primary">
@@ -192,45 +151,7 @@ export default function HomePage() {
         </section>
 
         {/* Footer */}
-        <footer className="w-full py-12 bg-background border-t border-border">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid gap-8 md:grid-cols-4">
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Genviral</h3>
-                <p className="text-muted-foreground text-sm">
-                  Create viral videos with AI-powered technology
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Product</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li><Link href="/#features" className="hover:text-foreground">Features</Link></li>
-                  <li><Link href="/pricing" className="hover:text-foreground">Pricing</Link></li>
-                  <li><Link href="/#how-it-works" className="hover:text-foreground">How it Works</Link></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Support</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li><a href="#" className="hover:text-foreground">Help Center</a></li>
-                  <li><a href="#" className="hover:text-foreground">Contact Us</a></li>
-                  <li><a href="#" className="hover:text-foreground">Status</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Legal</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li><a href="#" className="hover:text-foreground">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-foreground">Terms of Service</a></li>
-                  <li><a href="#" className="hover:text-foreground">Cookie Policy</a></li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-              © 2024 Genviral. All rights reserved.
-            </div>
-          </div>
-        </footer>
+        <LazyFooter />
       </div>
     </AuthProvider>
   );
