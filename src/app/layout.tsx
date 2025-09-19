@@ -58,6 +58,14 @@ export default function RootLayout({
             gtag('config', 'G-J8S2S6GLMT');
           `}
         </Script>
+        
+        {/* Umami Analytics */}
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="a2b916d8-bd35-45dc-9b48-30a19b7c63d1"
+          strategy="afterInteractive"
+        />
       </head>
       <body className={inter.className}>
         <AuthProvider>
